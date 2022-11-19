@@ -36,6 +36,7 @@ public class CitaMecanica {
         return "CitaID: " + citaID + "\nInformacion Cita: " + informacionCita +
                 "\nInformacion Cliente: " + informacionCliente +
                 "\nInformacion Vehiculo: " + informacionVehiculo +
+                "\nInformacion Cita: " + informacionCita +
                 "\nInformacion Tecnico: " + informacionTecnico;
     }
 }

@@ -20,9 +20,8 @@ public class InterfazEliminar {
     }
 
     public void EliminarCita(int citaID) {
-        String nombre = "C:\\Users\\Steven\\Desktop\\CitaID" + citaID + ".txt";
         try {
-            File archivo = new File(nombre);
+            File archivo = new File(nombreArchivoCita(citaID));
             if (archivo.delete()) {
                 System.out.println("Cita eliminada exitosamente");
             }
@@ -31,17 +30,19 @@ public class InterfazEliminar {
         }
     }
 
+    //Método para formar el nombre del archivo de la cita a EliminarA
+    public String nombreArchivoCita(int citaID){
+        return "C:\\Users\\Steven\\Desktop\\CitaID" + citaID + ".txt";
+    }
+
+
     public boolean ComprobarExistencia(int citaID) {
-
-        //Busqueda del archivo
-        String nombre = "C:\\Users\\JAVIER\\Desktop\\CitaID" + citaID + ".txt";
-
         File archivo;
         FileReader fr;
         BufferedReader br;
 
         try {
-            archivo = new File(nombre);
+            archivo = new File(nombreArchivoCita(citaID));
             if (archivo.exists()) {
                 return true;
             }

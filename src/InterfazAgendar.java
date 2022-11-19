@@ -118,7 +118,7 @@ public class InterfazAgendar {
             System.out.println("\t3.5. Modelo:");
             modelo = lectura.next();
 
-        System.out.println("4. Descripcion:");
+        System.out.println("4. Descripcion de la cita (Requerimientos):");
         descripcionCita= lectura.next();
 
         System.out.println("1. Agendar Cita"
