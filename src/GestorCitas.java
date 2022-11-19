@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class GestorCitas {
-    public static void GestorCitas() {
+    public static void Menu() {
         //Variables
         int opcion;
 
