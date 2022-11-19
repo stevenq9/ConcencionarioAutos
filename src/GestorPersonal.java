@@ -25,7 +25,7 @@ public class GestorPersonal {
         nombreTecnico += lectura.next();
         System.out.println("Ingrese el numero telefonico del técnico:");
         numeroTecnico = lectura.nextInt();
-        tecnico = new Tecnico(nombreTecnico, numeroTecnico); //Registro del tecnico
+        tecnico = new Tecnico(nombreTecnico.toUpperCase(), numeroTecnico); //Registro del tecnico
     }
 
     //Eliminar Tecnico
@@ -39,6 +39,30 @@ public class GestorPersonal {
         } catch (Exception e) {
             System.out.println("Error al eliminar");
 
+        }
+    }
+
+    //Registrar Respaldo: Crear archivo de nuevo tecnico registrado
+    public void RegistrarRespaldo(){  //Registro tecnico en el archivo de respaldo
+        FileWriter w;
+        BufferedWriter bw;
+        PrintWriter wr;
+        try{
+            //Crear respaldo de nuevo Tecnico Registrado
+            File respaldo = new File("C:\\Users\\Steven\\Desktop\\PersonalConcesionario\\" +
+                    nombreTecnico.toUpperCase() +".txt");
+            w = new FileWriter(respaldo);
+            bw = new BufferedWriter(w);
+            wr = new PrintWriter(bw);
+            wr.append(tecnico.toString());
+            wr.close();
+            bw.close();
+            //Informacion Respaldo Creado
+            System.out.println("--------------------- Tecnico Resgistrado ------------------------------------");
+            System.out.println(tecnico.toString());
+            System.out.println("---------------------------------------------------------");
+        }catch(Exception e){
+            System.out.println("Error al registrar Respaldo");
         }
     }
 
@@ -62,26 +86,8 @@ public class GestorPersonal {
 
             switch (opcion){
                 case 1:                //Registro Tecnico
-                    //Registro tecnico en el archivo de respaldo
-                    FileWriter w;
-                    BufferedWriter bw;
-                    PrintWriter wr;
-                    try{
-                        RegistrarTecnico();
-                        File respaldo = new File("C:\\Users\\Steven\\Desktop\\PersonalConcesionario\\" + nombreTecnico.toUpperCase() +".txt");
-                        w = new FileWriter(respaldo);
-                        bw = new BufferedWriter(w);
-                        wr = new PrintWriter(bw);
-                        wr.append(tecnico.toString());
-                        wr.close();
-                        bw.close();
-                        System.out.println("--------------------- Tecnico Resgistrado ------------------------------------");
-                        System.out.println(tecnico.toString());
-                        System.out.println("---------------------------------------------------------");
-
-                    }catch(Exception e){
-                        System.out.println("Error al registrarTecnico");
-                    }
+                    RegistrarTecnico();
+                    RegistrarRespaldo();
                     break;
                 case 2:  //Eliminar Tecnico
                     System.out.println("Eliminar Tecnico ");
@@ -89,12 +95,9 @@ public class GestorPersonal {
                     nombreTecnico = lectura.next();
                     System.out.println("Ingrese el nombre del técnico a eliminar:");
                     nombreTecnico += lectura.next();
-
                     EliminarTecnico(nombreTecnico);
-
                     break;
-                case 3:
-                    System.out.println("");
+                case 3:  //Salir
                     break;
                 default:
                     System.out.print("Opcion no valida");
