@@ -10,7 +10,25 @@ public class GestorPersonal {
     private String nombreTecnico;
     private int numeroTecnico;
 
+    //Scanner para lectura de datos
+    Scanner lectura = new Scanner (System.in);
+
     //Métodos
+
+    //Registro Personal
+    public void RegistrarTecnico(){
+        //Ingreso de datos del nuevo Tecnico
+        System.out.println("\t Registrar Tecnico ");
+        System.out.println("Ingrese el apellido del técnico:");
+        nombreTecnico = lectura.next();
+        System.out.println("Ingrese el nombre del técnico:");
+        nombreTecnico += lectura.next();
+        System.out.println("Ingrese el numero telefonico del técnico:");
+        numeroTecnico = lectura.nextInt();
+        tecnico = new Tecnico(nombreTecnico, numeroTecnico); //Registro del tecnico
+    }
+
+    //Menu
     public void Menu(){
         int opcion=0;
         while (opcion != 3) {
@@ -29,33 +47,20 @@ public class GestorPersonal {
 
 
             switch (opcion){
-                case 1:
-                    System.out.println("\t Registrar Tecnico ");
-                    System.out.println("Ingrese el apellido del técnico:");
-                    nombreTecnico = lectura.next();
-                    System.out.println("Ingrese el nombre del técnico:");
-                    nombreTecnico += lectura.next();
-
-                    System.out.println("Ingrese el numero telefonico del técnico:");
-                    numeroTecnico = lectura.nextInt();
-
-
-                    //Regsitro de la cita en el archivo de respaldo
+                case 1:                //Registro Tecnico
+                    //Registro tecnico en el archivo de respaldo
                     FileWriter w;
                     BufferedWriter bw;
                     PrintWriter wr;
                     try{
-                        tecnico = new Tecnico(nombreTecnico, numeroTecnico);
+                        RegistrarTecnico();
                         File respaldo = new File("C:\\Users\\Steven\\Desktop\\PersonalConcesionario\\" + nombreTecnico.toUpperCase() +".txt");
                         w = new FileWriter(respaldo);
                         bw = new BufferedWriter(w);
                         wr = new PrintWriter(bw);
-
-
                         wr.append(tecnico.toString());
                         wr.close();
                         bw.close();
-
                         System.out.println("--------------------- Tecnico Resgistrado ------------------------------------");
                         System.out.println(tecnico.toString());
                         System.out.println("---------------------------------------------------------");
