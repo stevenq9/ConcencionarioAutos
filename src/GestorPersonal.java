@@ -28,6 +28,20 @@ public class GestorPersonal {
         tecnico = new Tecnico(nombreTecnico, numeroTecnico); //Registro del tecnico
     }
 
+    //Eliminar Tecnico
+    public void EliminarTecnico(String nombreTecnico){
+        try {
+            File archivo = new File("C:\\Users\\Steven\\Desktop\\PersonalConcesionario\\"
+                    + nombreTecnico.toUpperCase() +".txt");
+            if (archivo.delete()) {
+                System.out.println("Tecnico eliminado Correctamente");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al eliminar");
+
+        }
+    }
+
     //Menu
     public void Menu(){
         int opcion=0;
@@ -69,21 +83,15 @@ public class GestorPersonal {
                         System.out.println("Error al registrarTecnico");
                     }
                     break;
-                case 2:
+                case 2:  //Eliminar Tecnico
                     System.out.println("Eliminar Tecnico ");
                     System.out.println("Ingrese el apellido del técnico a eliminar:");
                     nombreTecnico = lectura.next();
                     System.out.println("Ingrese el nombre del técnico a eliminar:");
                     nombreTecnico += lectura.next();
-                    try {
-                        File archivo = new File("C:\\Users\\Steven\\Desktop\\PersonalConcesionario\\" + nombreTecnico.toUpperCase() +".txt");
-                        if (archivo.delete()) {
-                            System.out.println("Tecnico eliminado Correctamente");
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Error al eliminar");
 
-                    }
+                    EliminarTecnico(nombreTecnico);
+
                     break;
                 case 3:
                     System.out.println("");
