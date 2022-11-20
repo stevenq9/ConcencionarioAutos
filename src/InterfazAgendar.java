@@ -29,13 +29,18 @@ public class InterfazAgendar {
     //Metodos
     CitaMecanica nuevaCita;
     File respaldo;
-    public void RespadoRegistroCita(){
+    public void AgendarNuevaCita(Vehiculo vehiculo, Cliente cliente, Tecnico tecnico, String descripcionCita){
+        nuevaCita = new CitaMecanica(numCita, date, descripcionCita,
+                cliente.toString(),
+                vehiculo.toString(), tecnico.toString());
+
         //Regsitro de la cita en el archivo de respaldo
         FileWriter w;
         BufferedWriter bw;
         PrintWriter wr;
+        String nombre = "C:\\Users\\Steven\\Desktop\\CitaID" + nuevaCita.getCitaID()+".txt";
         try{
-            respaldo = new File("C:\\Users\\Steven\\Desktop\\CitaID" + nuevaCita.getCitaID()+".txt");
+            respaldo = new File(nombre);
             w = new FileWriter(respaldo);
             bw = new BufferedWriter(w);
             wr = new PrintWriter(bw);
@@ -50,17 +55,18 @@ public class InterfazAgendar {
         }catch(Exception e){
             System.out.println("Error al almacenar la cita");
         }
-    }
-    public void AgendarNuevaCita(Vehiculo vehiculo, Cliente cliente, Tecnico tecnico, String descripcionCita){
-        nuevaCita = new CitaMecanica(numCita, date, descripcionCita,
-                cliente.toString(),
-                vehiculo.toString(), tecnico.toString());
-        RespadoRegistroCita();
 
     };
 
     public boolean VerificarDisponibilidad(String date){
         return true;
+    }
+    public void asignarCliente(){
+        cliente = new Cliente(nombreCliente, cedulaCliente, numeroCliente, direcionCliente);
+    }
+
+    public void asignarVehiculo(){
+        vehiculo = new Vehiculo(placa, recorrido, marca, year, modelo);
     }
 
     public void asignarTecnico(){
@@ -73,7 +79,8 @@ public class InterfazAgendar {
     }
 
     public void InterfazAgendar(){
-        int opcion = 0;
+        int opcion;
+
         Scanner lectura = new Scanner (System.in);
         System.out.println("---------------------------------------------------------");
         System.out.println("\t\tAgendar Cita");
@@ -81,30 +88,42 @@ public class InterfazAgendar {
         System.out.println("1. Ingrese la fecha de la cita:");
         date = lectura.next();
 
+        System.out.println("2. Datos del Cliente:");
+            System.out.println("\t2.1. Nombre:");
+            nombreCliente = lectura.next();
 
+            System.out.println("\t2.2. CI:");
+            cedulaCliente = lectura.nextInt();
+
+            System.out.println("\t2.3. Numero:");
+            numeroCliente= lectura.nextInt();
+
+            System.out.println("\t2.4. Direccion:");
+            direcionCliente = lectura.next();
 
         System.out.println("3. Datos del vehiculo:");
 
-        System.out.println("\t3.1. Placa:");
-        placa = lectura.next();
+            System.out.println("\t3.1. Placa:");
+            placa = lectura.next();
 
-        System.out.println("\t3.2. Recorrido:");
-        recorrido = lectura.nextInt();
+            System.out.println("\t3.2. Recorrido:");
+            recorrido = lectura.nextInt();
 
-        System.out.println("\t3.3. Marca:");
-        marca = lectura.next();
+            System.out.println("\t3.3. Marca:");
+            marca = lectura.next();
 
-        System.out.println("\t3.4. Año:");
-        year = lectura.nextInt();
+            System.out.println("\t3.4. Año:");
+            year = lectura.nextInt();
 
-        System.out.println("\t3.5. Modelo:");
-        modelo = lectura.next();
+            System.out.println("\t3.5. Modelo:");
+            modelo = lectura.next();
 
         System.out.println("4. Descripcion:");
         descripcionCita= lectura.next();
 
         System.out.println("1. Agendar Cita"
-                + "\n2. Volver");
+                            + "\n2. Volver");
+
 
         opcion = lectura.nextInt();
         System.out.println("---------------------------------------------------------");
@@ -113,8 +132,8 @@ public class InterfazAgendar {
             case 1:
                 numCita++;
                 try{
-                    cliente = new Cliente(nombreCliente, cedulaCliente, numeroCliente, direcionCliente);
-                    vehiculo = new Vehiculo(placa, recorrido, marca, year, modelo);
+                    asignarCliente();
+                    asignarVehiculo();
                     asignarTecnico();
                     if(VerificarDisponibilidad(date)){
                         AgendarNuevaCita(vehiculo, cliente, tecnico, descripcionCita);

@@ -7,22 +7,21 @@ import java.util.Scanner;
 public class InterfazEliminar {
 
     //Atributos
+    private CitaMecanica cita = new CitaMecanica();
     Scanner lectura = new Scanner(System.in);
-    int IDCita;
-    int opcion;
+    private int IDCita;
+    private int opcion;
 
     //Metodos
     File respaldo;
-    private JTextField txtID;
 
     public void solicitarDatos() {
         JOptionPane.showMessageDialog(null, "Ingrese cuidadosamente los datos requeridos para eliminar la cita");
     }
 
     public void EliminarCita(int citaID) {
-        String nombre = "C:\\Users\\Steven\\Desktop\\CitaID" + citaID + ".txt";
         try {
-            File archivo = new File(nombre);
+            File archivo = new File(cita.nombreArchivoCita(citaID));
             if (archivo.delete()) {
                 System.out.println("Cita eliminada exitosamente");
             }
@@ -31,17 +30,15 @@ public class InterfazEliminar {
         }
     }
 
+
+
     public boolean ComprobarExistencia(int citaID) {
-
-        //Busqueda del archivo
-        String nombre = "C:\\Users\\JAVIER\\Desktop\\CitaID" + citaID + ".txt";
-
         File archivo;
         FileReader fr;
         BufferedReader br;
 
         try {
-            archivo = new File(nombre);
+            archivo = new File(cita.nombreArchivoCita(citaID));
             if (archivo.exists()) {
                 return true;
             }
@@ -73,7 +70,7 @@ public class InterfazEliminar {
                     switch (opcion) {
                         case 1:
                             GestorCitas g1 = new GestorCitas();
-                            g1.GestorCitas();
+                            g1.Menu();
                             break;
                         default:
                             System.out.println("Opcion no valida");
@@ -87,7 +84,7 @@ public class InterfazEliminar {
                     switch (opcion) {
                         case 1:
                             GestorCitas g1 = new GestorCitas();
-                            g1.GestorCitas();
+                            g1.Menu();
                             break;
                         default:
                             System.out.println("Opcion no valida");
@@ -97,7 +94,7 @@ public class InterfazEliminar {
                 break;
             case 2:
                 GestorCitas g1 = new GestorCitas();
-                g1.GestorCitas();
+                g1.Menu();
                 break;
             default:
                 System.out.print("Opcion no valida");

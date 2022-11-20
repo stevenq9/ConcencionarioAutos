@@ -1,7 +1,4 @@
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class GestorPersonal {
@@ -42,30 +39,6 @@ public class GestorPersonal {
         }
     }
 
-    //Registrar Respaldo: Crear archivo de nuevo tecnico registrado
-    public void RegistrarRespaldo(){  //Registro tecnico en el archivo de respaldo
-        FileWriter w;
-        BufferedWriter bw;
-        PrintWriter wr;
-        try{
-            //Crear respaldo de nuevo Tecnico Registrado
-            File respaldo = new File("C:\\Users\\Steven\\Desktop\\PersonalConcesionario\\" +
-                    nombreTecnico.toUpperCase() +".txt");
-            w = new FileWriter(respaldo);
-            bw = new BufferedWriter(w);
-            wr = new PrintWriter(bw);
-            wr.append(tecnico.toString());
-            wr.close();
-            bw.close();
-            //Informacion Respaldo Creado
-            System.out.println("--------------------- Tecnico Resgistrado ------------------------------------");
-            System.out.println(tecnico.toString());
-            System.out.println("---------------------------------------------------------");
-        }catch(Exception e){
-            System.out.println("Error al registrar Respaldo");
-        }
-    }
-
     //Menu
     public void Menu(){
         int opcion=0;
@@ -87,7 +60,7 @@ public class GestorPersonal {
             switch (opcion){
                 case 1:                //Registro Tecnico
                     RegistrarTecnico();
-                    RegistrarRespaldo();
+                    tecnico.RegistrarRespaldo();
                     break;
                 case 2:  //Eliminar Tecnico
                     System.out.println("Eliminar Tecnico ");

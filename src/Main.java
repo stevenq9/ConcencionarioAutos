@@ -4,7 +4,7 @@ public class Main {
     //Métodos
     public static void EjecutarGestorCitas(){
         GestorCitas g1 = new GestorCitas();
-        g1.GestorCitas();
+        g1.Menu();
     }
     public static void EjecutarGestorPersonal(){
         GestorPersonal g2 = new GestorPersonal();
