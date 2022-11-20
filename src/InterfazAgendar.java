@@ -38,7 +38,7 @@ public class InterfazAgendar {
         FileWriter w;
         BufferedWriter bw;
         PrintWriter wr;
-        String nombre = "C:\\Users\\Steven\\Desktop\\CitaID" + nuevaCita.getCitaID()+".txt";
+        String nombre = nuevaCita.nombreArchivoCita(nuevaCita.getCitaID());
         try{
             respaldo = new File(nombre);
             w = new FileWriter(respaldo);

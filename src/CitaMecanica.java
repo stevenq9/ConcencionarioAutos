@@ -6,6 +6,8 @@ public class CitaMecanica {
     private String informacionVehiculo;
     private String informacionTecnico;
 
+    //Constructores
+    public CitaMecanica(){};
 
     public CitaMecanica(int numCita, String fecha, String informacionCita, String informacionCliente, String informacionVehiculo,
                         String informacionTecnico) {
@@ -21,6 +23,7 @@ public class CitaMecanica {
         this.toString();
     }
 
+    //Metodos de acceso
     public String getFecha() {
         return fecha;
     }
@@ -29,8 +32,6 @@ public class CitaMecanica {
         return citaID;
     }
 
-
-
     @Override
     public String toString() {
         return "CitaID: " + citaID + "\nInformacion Cita: " + informacionCita +
@@ -38,5 +39,10 @@ public class CitaMecanica {
                 "\nInformacion Vehiculo: " + informacionVehiculo +
                 "\nInformacion Cita: " + informacionCita +
                 "\nInformacion Tecnico: " + informacionTecnico;
+    }
+
+    //Metodo para encontrar la ruta del archivo de respaldo de una cita
+    public String nombreArchivoCita(int citaID){
+        return "C:\\Users\\Steven\\Desktop\\CitaID" + citaID + ".txt";
     }
 }

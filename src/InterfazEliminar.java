@@ -7,13 +7,13 @@ import java.util.Scanner;
 public class InterfazEliminar {
 
     //Atributos
+    private CitaMecanica cita = new CitaMecanica();
     Scanner lectura = new Scanner(System.in);
-    int IDCita;
-    int opcion;
+    private int IDCita;
+    private int opcion;
 
     //Metodos
     File respaldo;
-    private JTextField txtID;
 
     public void solicitarDatos() {
         JOptionPane.showMessageDialog(null, "Ingrese cuidadosamente los datos requeridos para eliminar la cita");
@@ -21,7 +21,7 @@ public class InterfazEliminar {
 
     public void EliminarCita(int citaID) {
         try {
-            File archivo = new File(nombreArchivoCita(citaID));
+            File archivo = new File(cita.nombreArchivoCita(citaID));
             if (archivo.delete()) {
                 System.out.println("Cita eliminada exitosamente");
             }
@@ -30,10 +30,6 @@ public class InterfazEliminar {
         }
     }
 
-    //Método para formar el nombre del archivo de la cita a EliminarA
-    public String nombreArchivoCita(int citaID){
-        return "C:\\Users\\Steven\\Desktop\\CitaID" + citaID + ".txt";
-    }
 
 
     public boolean ComprobarExistencia(int citaID) {
@@ -42,7 +38,7 @@ public class InterfazEliminar {
         BufferedReader br;
 
         try {
-            archivo = new File(nombreArchivoCita(citaID));
+            archivo = new File(cita.nombreArchivoCita(citaID));
             if (archivo.exists()) {
                 return true;
             }
