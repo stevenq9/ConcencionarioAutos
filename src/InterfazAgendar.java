@@ -30,7 +30,7 @@ public class InterfazAgendar {
     //Metodos
     CitaMecanica nuevaCita;
     File respaldo;
-    public void RespalgoAgendarCita(){
+    public void RespaldoAgendarCita(){
 
         FileWriter w;
         BufferedWriter bw;
@@ -154,7 +154,7 @@ public class InterfazAgendar {
                 switch (opcion){
                     case 1:
                         GestorCitas g1 = new GestorCitas();
-                        g1.GestorCitas();
+                        g1.Menu();
                         break;
                     default:
                         System.out.println("Opcion no valida");
@@ -163,7 +163,7 @@ public class InterfazAgendar {
                 break;
             case 2:
                 GestorCitas g1 = new GestorCitas();
-                g1.GestorCitas();
+                g1.Menu();
                 break;
             default:
                 System.out.print("Opcion no valida");
