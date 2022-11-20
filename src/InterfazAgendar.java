@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 public class InterfazAgendar {
     //Variables
+    Scanner lectura = new Scanner (System.in);
     String date;
     String nombreCliente;
     int cedulaCliente;
@@ -29,18 +30,13 @@ public class InterfazAgendar {
     //Metodos
     CitaMecanica nuevaCita;
     File respaldo;
-    public void AgendarNuevaCita(Vehiculo vehiculo, Cliente cliente, Tecnico tecnico, String descripcionCita){
-        nuevaCita = new CitaMecanica(numCita, date, descripcionCita,
-                cliente.toString(),
-                vehiculo.toString(), tecnico.toString());
+    public void RespalgoAgendarCita(){
 
-        //Regsitro de la cita en el archivo de respaldo
         FileWriter w;
         BufferedWriter bw;
         PrintWriter wr;
-        String nombre = "C:\\Users\\Steven\\Desktop\\CitaID" + nuevaCita.getCitaID()+".txt";
         try{
-            respaldo = new File(nombre);
+            respaldo = new File("C:\\Users\\Steven\\Desktop\\CitaID" + nuevaCita.getCitaID()+".txt");
             w = new FileWriter(respaldo);
             bw = new BufferedWriter(w);
             wr = new PrintWriter(bw);
@@ -55,20 +51,60 @@ public class InterfazAgendar {
         }catch(Exception e){
             System.out.println("Error al almacenar la cita");
         }
+    }
+    public void AgendarNuevaCita(Vehiculo vehiculo, Cliente cliente, Tecnico tecnico, String descripcionCita){
+        nuevaCita = new CitaMecanica(numCita, date, descripcionCita,
+                cliente.toString(),
+                vehiculo.toString(), tecnico.toString());
+
+
 
     };
 
     public boolean VerificarDisponibilidad(String date){
         return true;
     }
-    public void asignarCliente(){
+
+    public void RegistroCliente(){
+        System.out.println("2. Datos del Cliente:");
+        System.out.println("\t2.1. Nombre:");
+        nombreCliente = lectura.next();
+
+        System.out.println("\t2.2. CI:");
+        cedulaCliente = lectura.nextInt();
+
+        System.out.println("\t2.3. Numero:");
+        numeroCliente= lectura.nextInt();
+
+        System.out.println("\t2.4. Direccion:");
+        direcionCliente = lectura.next();
+
         cliente = new Cliente(nombreCliente, cedulaCliente, numeroCliente, direcionCliente);
     }
 
-    public void asignarVehiculo(){
+    public void RegistroVehiculo(){
+        System.out.println("3. Datos del vehiculo:");
+
+        System.out.println("\t3.1. Placa:");
+        placa = lectura.next();
+
+        System.out.println("\t3.2. Recorrido:");
+        recorrido = lectura.nextInt();
+
+        System.out.println("\t3.3. Marca:");
+        marca = lectura.next();
+
+        System.out.println("\t3.4. Año:");
+        year = lectura.nextInt();
+
+        System.out.println("\t3.5. Modelo:");
+        modelo = lectura.next();
+
+        System.out.println("4. Descripcion:");
+        descripcionCita= lectura.next();
+
         vehiculo = new Vehiculo(placa, recorrido, marca, year, modelo);
     }
-
     public void asignarTecnico(){
         tecnico = new Tecnico("Ing. Juan Herrera ", Integer.parseInt("0998755215")
         );
@@ -81,45 +117,15 @@ public class InterfazAgendar {
     public void InterfazAgendar(){
         int opcion;
 
-        Scanner lectura = new Scanner (System.in);
         System.out.println("---------------------------------------------------------");
         System.out.println("\t\tAgendar Cita");
 
         System.out.println("1. Ingrese la fecha de la cita:");
         date = lectura.next();
 
-        System.out.println("2. Datos del Cliente:");
-            System.out.println("\t2.1. Nombre:");
-            nombreCliente = lectura.next();
+        RegistroCliente();
 
-            System.out.println("\t2.2. CI:");
-            cedulaCliente = lectura.nextInt();
-
-            System.out.println("\t2.3. Numero:");
-            numeroCliente= lectura.nextInt();
-
-            System.out.println("\t2.4. Direccion:");
-            direcionCliente = lectura.next();
-
-        System.out.println("3. Datos del vehiculo:");
-
-            System.out.println("\t3.1. Placa:");
-            placa = lectura.next();
-
-            System.out.println("\t3.2. Recorrido:");
-            recorrido = lectura.nextInt();
-
-            System.out.println("\t3.3. Marca:");
-            marca = lectura.next();
-
-            System.out.println("\t3.4. Año:");
-            year = lectura.nextInt();
-
-            System.out.println("\t3.5. Modelo:");
-            modelo = lectura.next();
-
-        System.out.println("4. Descripcion:");
-        descripcionCita= lectura.next();
+        RegistroVehiculo();
 
         System.out.println("1. Agendar Cita"
                             + "\n2. Volver");
@@ -132,8 +138,6 @@ public class InterfazAgendar {
             case 1:
                 numCita++;
                 try{
-                    asignarCliente();
-                    asignarVehiculo();
                     asignarTecnico();
                     if(VerificarDisponibilidad(date)){
                         AgendarNuevaCita(vehiculo, cliente, tecnico, descripcionCita);
